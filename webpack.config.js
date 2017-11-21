@@ -1,28 +1,17 @@
-const webpack = require('webpack');
-var path = require('path');
-module.exports = {
-  entry: {
-    main: './main.js',
-  },
-  output: {
-    path: path.join(__dirname, "build"),
-    publicPath: './',
-    filename: '[name].js'
-  },
-  module: {
-    loaders: [{
-      test: /\.(png|jpg)$/,
-      loader: 'url-loader?limit=8192'
-    }, {
-      test: /\.js?$/,
-      loaders: ['babel-loader'],
-      include: path.join(__dirname, '.')
-    }]
-  },
-  plugins: [
-    new webpack.DllReferencePlugin({
-      context: '.',
-      manifest: require("./build/bundle.manifest.json"),
-    }),
-  ]
-};
+var dev = require('./webpack-config/dev.js');
+var pro = require('./webpack-config/pro.js');
+var dll = require('./webpack.dll.config.js');
+var env = process.env.NODE_ENV;
+var finallyModule = {}
+switch(env){
+	case 'dev':
+	finallyModule = dev;
+	break;
+	case 'pro':
+	finallyModule = pro;
+	break;
+	case 'dll':
+	finallyModule = dll;
+	break;
+}
+module.exports = finallyModule

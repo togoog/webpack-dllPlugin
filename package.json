@@ -29,7 +29,11 @@
     "webpack-dev-server": "^2.5.0",
     "webpack-merge": "^4.1.0"
   },
-  "scripts": {},
+  "scripts": {
+    "start": "cross-env NODE_ENV=dev webpack-dev-server --inline --hot",
+    "bundle": "node server/deleteDir.js &&　cross-env NODE_ENV=pro webpack --display-modules",
+    "dll": "cross-env NODE_ENV=dll webpack -p --config webpack.dll.config.js --progress --profile --colors"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
