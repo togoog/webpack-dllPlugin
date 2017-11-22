@@ -5,9 +5,77 @@ import {HashRouter as Router, Route, Link,Switch,Redirect} from 'react-router-do
 const Home = () => {
 	return (<div>home</div>)
 }
-const Home1 = () => {
-	return (<div>home1</div>)
+
+class Home1 extends Component{
+	constructor(){
+		super()
+		console.log('constructor')
+		this.state = {
+			name:'lpc'
+		}
+	}
+	componentWillMount(){
+		console.log('componentWillMount')
+		// setTimeout(()=>{
+		// 	this.setState({
+		// 		name:'yy'
+		// 	})
+		// },2000)
+	}
+	componentDidMount(){
+		console.log('componentDidMount')
+	}
+	componentWillUpdate(){
+		console.log('componentWillUpdatet')
+	}
+	componentDidUpdate(){
+		console.log('componentDidUpdate')
+	}
+	shouldComponentUpdate(){
+		return true
+	}
+	componentWillReceiveProps(newProps){
+		console.log({'oldProps':this.props})
+		console.log({'newProps':newProps})
+		this.setState({
+			name:'yy'
+	 	})
+	}
+	render(){
+		console.log('render')
+		return(
+			<div>
+				{this.state.name}
+				{this.props.age}
+			</div>
+		)
+	}
 }
+
+class HomeBig extends Component{
+	constructor(){
+		super()
+		this.state= {
+			age:25
+		}
+	}
+	componentWillMount(){
+		setTimeout(()=>{
+			this.setState({
+				age:15
+			})
+		},2000)
+	}
+	render(){
+		return(
+			<div>
+				{this.state.age}
+				<Home1 age={this.state.age} />
+			</div>
+		)
+	}
+}
+
 const Home2 = () => {
 	return (<div>home2</div>)
 }
@@ -45,7 +113,7 @@ class App extends Component{
 
 			      <hr/>
 					<Switch>
-			      <Route exact path="/" component={Home}/>
+			      <Route exact path="/" component={HomeBig}/>
 			      <Route path="/page1" component={Page1}/>
 			      <Route path="/page2" component={Page2}/>
  				<Redirect to="/" />
