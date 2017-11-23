@@ -17,9 +17,9 @@ class Home1 extends Component{
 	componentWillMount(){
 		console.log('componentWillMount')
 		// setTimeout(()=>{
-		// 	this.setState({
-		// 		name:'yy'
-		// 	})
+			// this.setState({
+			// 	name:'yy'
+			// })
 		// },2000)
 	}
 	componentDidMount(){
